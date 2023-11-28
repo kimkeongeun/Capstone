@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>백석대학교 수강신청 사이트</title>
+    <style type="text/CSS">
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .login-form {
+            width: 300px;
+            height: 500px;
+            border: 0;
+            border-radius: 5px;
+            background-color: #EEEFF1;
+            padding: 25px;
+            margin: 0 auto;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .text-field {
+            font-size: 14px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            width: 280px;
+        }
+
+        .submit-btn {
+            color: #EEEFF1;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #0665B7;
+            margin-bottom: 70px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .link-btn {
+            color: #FFFFFF;
+            font-size: 14px;
+            height: 30px;
+            margin-bottom: 10px;
+            background-color: #3B5586;
+            padding: 0px;
+            border: 1px solid #9DAAC2;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        function doLogin(){
+            var varForm = document.loginForm;
+            var varLoginId = varForm.login_id;
+            var varLoginPw = varForm.passwd;
+            if (varLoginId.value == '') {
+                alert('학번을 입력하세요.'); 
+                varLoginId.focus();
+                return false
+            }
+            if (varLoginPw.value =='') {
+                alert('비밀번호를 입력하세요.');
+                varLoginPw.focus();
+                return false;
+            }
+            if(varLoginId.value=="20231234" && varLoginPw.value=="1234")  ///임시 아이디/ 비번
+            {
+                window.open('FUR001.html')  ///수강신청 메인페이지로 이동 
+            }
+            else
+            {
+                alert("아이디 또는 비밀번호가 일치하지 않습니다.")
+            }
+        }
+        
+        function doFindId(){
+            var vsUrl = "https://tcmssso.bu.ac.kr/bu/biz/IdFindForm.eps?id=portal";
+                window.open(vsUrl, "width=" + screen.width + ", height=" + screen.height);
+        }
+        function doShowPdf(){
+            var vsUrl = "https://drive.google.com/file/d/1inBZsSMG0royayg5myIyK0Y9yG3JGcr9/view?usp=sharing"
+                window.open(vsUrl, "width=" + screen.width + ", height=" + screen.height);
+        }
+        function doOpenGuide() {
+             window.open('guidePopup.html', 'popup01', 'width=800, height=600');
+        } 
+    </script>
+</head>
+<body>
+    <div class="login-form" style="margin-top: 20px; margin-bottom: 10px; text-align: center">
+        <span style="font-size: 22px; font-weight: bold; display: block; padding: 10px;">수강신청 로그인</span>
+        <form id="loginForm" name="loginForm">
+            <input type="text" name="login_id" maxlength="20" tabindex="1" class="text-field" placeholder="학번">
+            <input type="password" name="passwd" tabindex="2" class="text-field" placeholder="비밀번호">
+            <button class="submit-btn" tabindex="3" onclick="javascript:doLogin(); return false;">로그인</button>
+        </form>
+        <div>
+            <!--<a href="https://tcmssso.bu.ac.kr/bu/biz/IdFindForm.eps?id=portal">아이디/비밀번호 찾기</a> -->
+            <button class="link-btn" tabindex="4" onclick="javascript:doFindId(); return false;">아이디/비밀번호 찾기</button>
+            <button class="link-btn" tabindex="5" style="color: #ff0000; background-color: #E7EEF7;" onclick="javascript:doShowPdf(); return false;">※수강신청 화면설명※</button>
+            <button class="link-btn" tabindex="6" style="color: #ff0000; background-color: #E7EEF7;" onclick="javascript:doOpenGuide(); return false;">※수강신청 유의사항 및 안내 보기※</button>
+        </div>
+        <div>
+            <p style="color: #0000ff; font-size: 13px;">수강시청 전에 반드시 유의사항 및 안내를 확인해 주시길 바랍니다.</p>
+            <p style="color: #ff0000; font-size: 15px; font-weight: 800; text-decoration-line: underline;">수강신청 30분 전에 로그인이 가능합니다.
+                <br>
+                로그인한 상태로 제 시간에 수강신청이 가능합니다. 수강신청 시 유의해 주시길 바랍니다.
+            </p>
+        </div>
+</body>
+</html>
+        
