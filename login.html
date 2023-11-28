@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>백석대학교 수강신청 사이트</title>
-    <style type="text/CSS">
+    <style type="text/CSS">    ///CSS
         body {
             margin: 0;
             width: 100%;
@@ -59,7 +58,7 @@
             width: 100%;
         }
     </style>
-    <script type="text/javascript">
+    <script type="text/javascript">                 ///javascript 
         function doLogin(){
             var varForm = document.loginForm;
             var varLoginId = varForm.login_id;
@@ -76,7 +75,7 @@
             }
             if(varLoginId.value=="20231234" && varLoginPw.value=="1234")  ///임시 아이디/ 비번
             {
-                window.open('FUR001.html')  ///수강신청 메인페이지로 이동 
+                window.open('FUR001.html')  ///임시 수강신청 메인페이지로 이동 FUR001.html 연결
             }
             else
             {
@@ -86,14 +85,14 @@
         
         function doFindId(){
             var vsUrl = "https://tcmssso.bu.ac.kr/bu/biz/IdFindForm.eps?id=portal";
-                window.open(vsUrl, "width=" + screen.width + ", height=" + screen.height);
+                window.open(vsUrl, "width=" + screen.width + ", height=" + screen.height);          ///아이디/비밀번호찾기 url 연결
         }
         function doShowPdf(){
             var vsUrl = "https://drive.google.com/file/d/1inBZsSMG0royayg5myIyK0Y9yG3JGcr9/view?usp=sharing"
-                window.open(vsUrl, "width=" + screen.width + ", height=" + screen.height);
+                window.open(vsUrl, "width=" + screen.width + ", height=" + screen.height);                   ///수강신청 화면설명 url 연결
         }
         function doOpenGuide() {
-             window.open('guidePopup.html', 'popup01', 'width=800, height=600');
+             window.open('guidePopup.html', 'popup01', 'width=800, height=600');                 ///수강신청 유의사항 및 안내보기 guidePopup.html 연결 
         } 
     </script>
 </head>
