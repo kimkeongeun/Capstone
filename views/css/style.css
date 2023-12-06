@@ -1,0 +1,20 @@
+#tatle{
+color: #000;
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 30px */
+}
+
+table{
+    border: 1px solid #B7B7B7;
+}
+
+th, td{border: 1px solid;}
+
+button{
+    border-radius: 6px;
+    background: #848484;
+    
+}

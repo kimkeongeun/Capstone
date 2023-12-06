@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "classcatch",
+    "password": "classdb2!",
+    "database": "classcatch",
+    "host": "classcatch.cafe24app.com",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "classcatch",
+    "password": "classdb2!",
+    "database": "classcatch",
+    "host": "classcatch.cafe24app.com",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "classcatch",
+    "password": "classdb2!",
+    "database": "classcatch",
+    "host": "classcatch.cafe24app.com",
+    "dialect": "mysql"
+  }
+}

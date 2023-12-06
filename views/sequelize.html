@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CLASS CATCH</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+
+
+<body>
+    <p>
+        <div> 사용자 id : 1 </div>
+        <div> 해당 사용자가 담을 수 있는 학점 : 18</div>
+        <div> 현재 학점 : </div>
+    </p>
+    <p>
+        <div> 장바구니 id: 1</div>
+        <div> 임시 과목들</div>
+        <div> <table id="class-data">
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>구분</th>
+                <th>과목이름</th>
+                <th>과목코드</th>
+                <th>강의시간</th>
+                <th>학점</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for class_data in c_data %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td><button class="my-button" data-info='{"cord": "{{ class_data.cls_cord }}", "semester": "{{ class_data.cls_semester }}" }'>등록</button>
+                    </td>
+                    <td>{{class_data.cls_name}}</td>
+                    <td>{{class_data.cls_cord}}</td>
+                    <td>{{class_data.pg_time}}</td>
+                    <td>{{class_data.credit}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table></div>
+
+    </p>
+    <div>
+        <p id="tatle">장바구니</p>
+    </div>
+    <button id="B1">버튼</button>
+    <table id="cart-list">
+        <thead>
+        <tr>
+            <th>NO</th>
+            <th>구분</th>
+            <th>삭제</th>
+            <th>이수구분</th>
+            <th>과목코드-분반</th>
+            <th>학점</th>
+            <th>교과목명</th>
+            <th>담당교수</th>
+            <th>강의시간 및 강의실</th>
+            <th>강의유형</th>
+            <th>재수강 구분</th>
+            <th>취득년도/학기</th>
+            <th>취득 과목명</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for cart_item in cartItems %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td><button>버튼</button></td>
+                <td>{{cart_item.classData_id.cls_type}}</td>
+                <td>{{cart_item.classData_id.cls_cord}}</td>
+                <td>{{cart_item.classData_id.credit}}</td>
+                <td>{{cart_item.classData_id.cls_name}}</td>
+                <td>{{cart_item.classData_id.instrunctor}}</td>
+                <td>{{cart_item.classData_id.room + ' ' + cart_item.classData_id.pg_time }}</td>
+                <td>{{"전체학년"}}</td>
+                <td>{{"재수강구분"}}</td>
+                <td>{{"취득년도"}}</td>
+                <td>{{"취득 과목명"}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/public/sequelize.js"></script>
+</body>
+</html>
