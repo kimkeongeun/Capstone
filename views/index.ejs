@@ -1,0 +1,254 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .top-bar{
+        color:white;
+        height: 100px;
+        background-color: rgb(76, 76, 231);
+      }
+        .side-bar,
+        .side2-bar {
+            width: 350px;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            writing-mode: horizontal-tb;
+            transform: rotate(360deg);
+        }
+
+        .side-bar {
+            height: 50vh;
+            background-color: #9c9898;
+            bottom: 3cm;
+            left: 0;
+        }
+
+        .side2-bar {
+            display:flex;
+            flex-direction: column;
+            height: 39vh;
+            background-color: #d2cfcf;
+            bottom: 53cm;
+            left: 0;
+            align-items: center;
+        }
+
+        .additional-bar {
+            width: 850px;
+            height: 80px;
+            background-color: #999;
+            position: absolute;
+            top: 140px;
+            margin-left: 400px;
+        }
+
+        #table {
+            width: 850px;
+            height: 30px;
+            position: absolute;
+            top: 230px;
+            margin-left: 400px;
+        }
+
+        #table tr {
+            height: 50px;
+            background-color: #f2f2f2;
+        }
+
+        #table td,
+        #table th {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        /* 버튼 스타일 */
+        #selectclass,
+        #records,
+        #timetable {
+            background-color: #999;
+            color: black;
+            display: inline-block;
+            font-size: 20px;
+            line-height: 2cm;
+            border: none;
+            margin-left: 30px;
+            font-weight: bold;
+        }
+
+        /* 버튼 호버 스타일 */
+        #selectclass:hover,
+        #records:hover,
+        #timetable:hover {
+            color: white;
+        }
+        .ee,.sam, #searchButton {
+    display: block; /* 블록 요소로 설정하여 수직 정렬 */
+    margin: 5px 0; /* 각 요소 사이의 간격 조절 */
+}
+    </style>
+</head>
+<body onload="onCompletionTypeChange()">
+  <div class="top-bar">
+    <h1>백석대학교 수강신청</h1>
+  </div>
+    <div class="side-bar">사용자 정보</div>
+    <div class="side2-bar">
+        <form action="/" method="GET">
+            <div class="ee"><label for="completionType">이수구분</label>
+          
+            <select id="completionType" name="completionType" onchange="onCompletionTypeChange()">
+                <% completionTypes.forEach(function(completionType) { %>
+                    <option value="<%= completionType.cls_type %>">
+                        <%= completionType.cls_type %>
+                    </option>
+                <% }); %>
+            </select>
+</div>
+<div class="sam">
+            <label for="classification">구분</label>
+            <select id="classification" name="classification"></select>
+</div>
+            <!-- 수정된 부분: 검색 버튼의 이벤트 리스너 연결 -->
+            <button type="button" id="searchButton" onclick="onSearchButtonClick()">검색</button>
+        </form>
+    </div>
+    <div class="additional-bar">
+        <button id="selectclass">수강신청</button>
+        <button id="records">수강신청 내역</button>
+        <button id="timetable">시간표</button></a>
+    </div>
+    <table id="table" border="1">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>구분</th>
+                <th>이수구분</th>
+                <th>과목코드-분반</th>
+                <th>학년</th>
+                <th>학점</th>
+                <th>교과목명</th>
+                <th>담당교수</th>
+                <th>강의시간</th>
+                <th>강의실</th>
+                <th>신청</th>
+            </tr>
+        </thead>
+        <tbody id="searchResult">
+            <% for (let i = 0; i < searchResults.length; i++) { %>
+                <% const classItem = searchResults[i]; %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= classItem.detailed_area %></td>
+                    <td><%= classItem.cls_type %></td>
+                    <td><%= classItem.cls_cord %></td>
+                    <td><%= classItem.cls_semester %></td>
+                    <td><%= classItem.credit %></td>
+                    <td><%= classItem.cls_name %></td>
+                    <td><%= classItem.instrunctor %></td>
+                    <td><%= classItem.pg_time %></td>
+                    <td><%= classItem.room %></td>
+                    <td><button>신청</button></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <script>
+        function onCompletionTypeChange() {
+            var selectedCompletionType = document.getElementById("completionType").value;
+            var classificationDropdown = document.getElementById("classification");
+
+            // 수정된 부분: 선택한 이수구분에 따라 구분 드롭다운 초기화
+            classificationDropdown.innerHTML = "";
+
+            // 이수구분이 선택된 경우에만 구분 옵션 추가
+            if (selectedCompletionType !== "") {
+    <% if (detailedAreas && detailedAreas.length > 0) { %>
+        <% detailedAreas.forEach(function (area) { %>
+            var option = document.createElement("option");
+            option.value = "<%= area.detailed_area %>";
+            option.text = "<%= area.detailed_area %>";
+            classificationDropdown.add(option);
+        <% }); %>
+    <% } %>
+}
+
+        }
+
+        function onSearchButtonClick() {
+            // 선언된 변수들을 함수 상단에서 미리 선언
+            var selectedCompletionType, selectedClassification;
+
+            // 변수에 값 할당
+            selectedCompletionType = document.getElementById("completionType").value;
+            selectedClassification = document.getElementById("classification").value;
+
+            console.log('검색 요청: CompletionType=', selectedCompletionType, 'Classification=', selectedClassification);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        try {
+                            // 수정된 부분: JSON.parse 대신 response를 그대로 사용
+                            var searchResults = JSON.parse(xhr.responseText);
+                            console.log(searchResults);
+                            displaySearchResult(searchResults);
+                           
+                        } catch (e) {
+                            // 만약 JSON 파싱에 실패하면 HTML로 간주하고 표시
+                            document.getElementById("searchResult").innerHTML = xhr.responseText; 
+                          
+                        }
+                    }
+                }
+            };
+
+            // 수정된 부분: URL에 한글이 포함될 수 있으므로 인코딩
+            xhr.open("GET", "/?completionType=" + encodeURIComponent(selectedCompletionType) + "&classification=" + encodeURIComponent(selectedClassification), true);
+            xhr.send();
+        }
+        function displaySearchResult(searchResults) {
+        var tbody = document.getElementById("searchResult");
+        // 기존 행 삭제
+        tbody.innerHTML = "";
+
+        for (var i = 0; i < searchResults.length; i++) {
+            var classItem = searchResults[i];
+
+            // 새로운 테이블 행 생성
+            var row = document.createElement("tr");
+
+            // 각 속성에 대한 테이블 셀 추가
+            var cells = [
+                i + 1,
+                classItem.detailed_area,
+                classItem.cls_type,
+                classItem.cls_cord,
+                classItem.cls_semester,
+                classItem.credit,
+                classItem.cls_name,
+                classItem.instrunctor,
+                classItem.pg_time,
+                classItem.room,
+                '<button>신청</button>'
+            ];
+
+            for (var j = 0; j < cells.length; j++) {
+                var cell = document.createElement("td");
+                cell.innerHTML = cells[j];
+                row.appendChild(cell);
+            }
+
+            // 새로운 행을 tbody에 추가
+            tbody.appendChild(row);
+        }
+    }
+
+       
+    </script>
+</body>
+</html>
