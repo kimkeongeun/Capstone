@@ -1,0 +1,121 @@
+.top-bar {
+    height: 2cm;
+    background-color: rgb(69, 69, 243);
+    font-size: 30px;
+    padding-top: 15px;
+    line-height: 1cm;
+    color: white;
+}
+
+.top-bar span {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.top-bar button {
+    font-size: 30px;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#login {
+    background-color: rgb(69, 69, 243);
+    color: white;
+    display: inline-block;
+    margin-left: 1150px;
+}
+
+#refreshBtn {
+    background-color: rgb(69, 69, 243);
+    color: white;
+    border: 1px solid transparent;
+    border-left: 3px solid white;
+    padding: 8px 16px;
+}
+
+#login:hover {
+    color: #e2e2e4d7;
+    
+}
+
+#refreshBtn:hover {
+    color: #e2e2e4d7;
+    
+}
+
+
+.side-bar,
+.side2-bar {
+    width: 350px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    writing-mode: horizontal-tb;
+    transform: rotate(360deg);
+}
+
+.side-bar {
+    height: 50vh;
+    background-color: #666;
+    bottom: 3cm;
+    left: 0;
+}
+
+.side2-bar {
+    height: 39vh;
+    background-color: #d2cfcf;
+    bottom: 53cm;
+    left: 0;
+}
+
+.additional-bar {
+    width: 1450px;
+    height: 80px;
+    background-color: #999;
+    position: absolute;
+    top: 140px;
+    margin-left: 400px;
+}
+
+#table {
+    width: 1450px;
+    height: 30px;
+    position: absolute;
+    top: 230px;
+    margin-left: 400px;
+}
+
+#table tr {
+    height: 50px;
+    background-color: #f2f2f2;
+}
+
+#table td,
+#table th {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+
+#selectclass,
+#records,
+#timetable {
+    background-color: #999;
+    color: black;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 2cm;
+    border: none;
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+
+
+#selectclass:hover,
+#records:hover,
+#timetable:hover {
+    color: white;
+}
