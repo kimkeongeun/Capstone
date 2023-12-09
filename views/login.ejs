@@ -60,6 +60,20 @@
         }
     </style>
     <script type="text/javascript">
+function doLogin(){
+            var varForm = document.loginForm;
+            var varLoginId = varForm.login_id;
+            var varLoginPw = varForm.passwd;
+            if (varLoginId.value == '') {
+                alert('학번을 입력하세요.'); 
+                varLoginId.focus();
+                return false
+            }
+            if (varLoginPw.value =='') {
+                alert('비밀번호를 입력하세요.');
+                varLoginPw.focus();
+                return false;
+            }}
 
         function doFindId(){
             var vsUrl = "https://tcmssso.bu.ac.kr/bu/biz/IdFindForm.eps?id=portal";
