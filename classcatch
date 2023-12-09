@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class catch</title>
+    <link rel="stylesheet" type="text/css" href="classcatch.css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <span>백석대학교 수강신청시스템</span>
+        <a href="login.html"><button id="login">로그인</button></a>
+        <button id="refreshBtn">새로고침</button>
+    </div>
+    <div class="side-bar">
+        사용자정보
+    </div>
+    <div class="side2-bar">
+        세부선택
+    </div>
+    <div class="additional-bar">
+        <button id="selectclass">수강신청</button>
+        <button id="records">수강신청 내역</button>
+        <a href="timetable.html"><button id="timetable">시간표</button></a>
+    </div>
+    <table id="table" border="1">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>구분</th>
+                <th>이수구분</th>
+                <th>과목코드-분반</th>
+                <th>학년</th>
+                <th>학점</th>
+                <th>신입</th>
+                <th>교과목명</th>
+                <th>담당교수</th>
+                <th>강의시간 및 강의실</th>
+                <th>신청일시</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+
+</html>
