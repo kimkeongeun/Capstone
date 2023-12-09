@@ -33,12 +33,20 @@ app.get('/', (req, res) => {
   res.render('login');
 });
 
-app.get('/'), (req,res)=>{
-  connection.query('SELECT * FROM student',(error, rows)=> {
-    if (error) throw error;
-    console.log('User info is:', rows);
-  });
-  };
+app.post('/login', function(request, response){
+  var std_no = request.body.login_id;
+  var std_pw = request.body.password;
+  if (std_no && std_pw) {
+    connection.mysql.query('SELECT * FROM student WHERE std_no = ? AND std_pw = ?', [std_no, std_pw], function(error, results, fields){
+      if (error) throw error;
+      if (results.length > 0) {
+        request.session.loggedin = true;
+        request.session.std_no = std_no;
+        response.redirect('/');
+        response.end();
+      } 
+    });
+  }});
 
 
 app.get('/guidepopup.ejs', (req, res) => {
