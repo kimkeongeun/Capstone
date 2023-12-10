@@ -1,0 +1,313 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+
+        .top-bar{
+            padding: 27px 38px 23px 33px;
+            background: #4030ab;
+        }
+
+        .top-bar h1{
+            color: #FFF;
+            font-family: Inter;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 900;
+            line-height: 150%; /* 48px */
+        }
+
+        .side-bar {
+            width: 400px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #9E9E9E;
+        }
+
+        .side2-bar{
+            width: 400px;
+            height: 600px;
+            border: 1px solid #9E9E9E;
+            color: white;
+            line-height: 40px;
+            writing-mode: horizontal-tb;
+            transform: rotate(360deg);
+            flex-direction: column;
+            height: 39vh;
+            bottom: 53cm;
+            left: 0;
+            align-items: center;
+        }
+
+
+        .box{
+           display: flex;
+           width:100%;
+        }
+
+        .box2{
+           display: flex;
+           margin-left:40px;
+           width: 70%;
+           flex-direction: column;
+        }
+
+        .box3{
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .additional-bar{
+            margin: 20px 20px;
+            display: flex;
+            width: 90%;
+            height: 80px;
+            align-items: center;
+        }
+
+        #table, #reg-list {
+            width: 1500px;
+            height: 30px;
+            top: 230px;
+            margin-left: 20px;
+        }
+
+        #reg-list {
+            width: 1500px;
+            margin-left: 60px;
+        }
+
+        #table tr, #reg-list tr {
+            height: 50px;
+        }
+
+        #table td,
+        #table th, #reg-list td, #reg-list th {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        /* 버튼 스타일 */
+        #selectclass,
+        #records,
+        #timetable {
+            width: 200px;
+            height: 60px;
+            color: black;
+            font-size: 20px;
+            border: 1px solid #9E9E9E;
+            margin-left: 30px;
+            font-weight: bold;            
+            background-color: #fff;
+            border-radius: 6px;
+        }
+
+        /* 버튼 호버 스타일 */
+        #selectclass:hover,
+        #records:hover,
+        #timetable:hover {
+            color: #3885b5;
+        }
+
+        .title2{
+            color: #4030ab;
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%; /* 30px */
+            margin: 20px 20px;
+        }
+
+        .box3 p{
+            color: #black;
+            font-family: Inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 150%; /* 24px */
+            margin : 5px 20px 5px 0px;
+        }
+
+        .b3_1 p{
+            text-align: right;
+            font-weight: bold;
+            
+        }
+
+        
+
+        .side2-bar_t{
+            color: black;
+            font-size: 20px;
+        }
+
+        select {
+        -o-appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 150px;
+        height: 35px;
+        background-size: 20px;
+        padding: 5px 30px 5px 10px;
+        border-radius: 4px;
+        outline: 0 none;
+        }
+
+        .but{
+            width:50px;
+            height: 30px;
+            border: none;
+            border-radius: 6px;
+            background-color: #8286b5;
+            color: #fff;
+        }
+
+
+        
+        table {
+        border-collapse: collapse;
+        border: 0;
+        }
+        th,
+        td {
+        border: 1px solid #aaa;
+        background-clip: padding-box;
+        scroll-snap-align: start;
+        }
+        tbody tr:last-child th,
+        tbody tr:last-child td {
+        border-bottom: 0;
+        }
+        thead {
+        position: relative;
+        }
+        th,
+        td {
+        padding: 0.6rem;
+        min-width: 6rem;
+        text-align: left;
+        margin: 0;
+        }
+        thead th {
+        position: sticky;
+        top: 0;
+        border-top: 0;
+        background-clip: padding-box;
+        }
+        thead th.pin {
+        left: 0;
+        border-left: 0;
+        }
+        tbody th {
+        background-clip: padding-box;
+        border-left: 0;
+        }
+        tbody {
+        position: relative;
+        }
+        tbody th {
+        position: sticky;
+        left: 0;
+        }
+        thead th,
+        tbody th {
+        background-color: #f8f8f8;
+        }
+
+        .side2_d{
+            display: flex;
+            justify-content: flex-end;
+            text-align: right;
+            padding-right: 80px;
+
+        }
+        .a{
+            padding-top: 20px;
+        }
+
+        .titel3{
+            color: #4030ab;
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%; /* 30px */
+            margin: 20px 40px;
+            padding-left: 20px;
+        }
+
+    </style>
+</head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/public/sequelize.js"></script>
+    
+<body>
+    <div class="top-bar">
+        <h1>백석대학교 수강신청</h1>
+    </div>
+    <div class="box">
+        <div>
+            <div class="side-bar">
+                <div class ="title2">사용자 정보</div>
+                <div class="box3">
+                    <div class="b3_1">
+                        <p>년도/학기</p>
+                        <p>소속</p>
+                        <p>학년</p>
+                        <p>성명/학번</p>
+                        <p>신청가능학점</p>
+                        <p>희망전공</p>
+                    </div>
+                    <div class="b3_2" id="stu_info">
+                        <p>2023년도 2학기</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box2">
+            <div>
+                <div class="additional-bar">
+                    <button id="selectclass" onclick="location.href='index'">수강신청</button>
+                    <button id="records" onclick="location.href='index2'">수강신청 내역</button>
+                    <button id="timetable" onclick="location.href='index3'">시간표</button></a>
+                </div>
+            </div>
+            <div>
+            <table id="reg-list">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>구분</th>
+                        <th>이수구분</th>
+                        <th>과목코드-분반</th>
+                        <th>학점</th>
+                        <th>신입</th>
+                        <th>교과목명</th>
+                        <th>담당교수</th>
+                        <th>강의시간 및 강의실</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                        <script>getReg_list();</script>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

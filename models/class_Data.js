@@ -70,6 +70,7 @@ class class_Data extends Sequelize.Model{
 
     static associate(db){
         db.class_Data.hasMany(db.cart_item, {foreignkey:'cls_cord', sourceKey: 'cls_cord', as: 'classData_id' });
+        db.class_Data.hasMany(db.registration, {foreignkey:'cls_cord', sourceKey: 'cls_cord', as: 'clsData_id' });
     }
 };
 

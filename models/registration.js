@@ -36,7 +36,10 @@ class registration extends Sequelize.Model{
 
     static associate(db){
         db.registration.belongsTo(db.student, {foreignkey: 'std_id', sourceKey: 'std_id'});
+        db.registration.belongsTo(db.class_Data, { foreignKey: 'cls_cord', targetKey: 'cls_cord', as: 'clsData_id' });
     }
+
+    
 };
 
 module.exports = registration;
