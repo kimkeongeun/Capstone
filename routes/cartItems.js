@@ -9,17 +9,12 @@ const router = express.Router();
 
 router.route('/')
     .get(async (req, res, next) =>{
-
-        
-        
-
         const stdents = await std.findAll({
             attributes:['std_id'],
             where:{std_no:req.session.std_no, std_pw:req.session.std_pw}
         });
         
         const stu = stdents[0].dataValues;
-        console.log("Student with std_id:", stu.std_id);
         req.session.std_id = stu.std_id;
 
 
@@ -29,9 +24,9 @@ router.route('/')
             attributes:['cart_id'],
             where:{std_id:req.session.std_id,}
         })
-        const cat = user_cart[0].dataValues;
-
-        if(user_cart.count === undefined){
+        
+        if(user_cart.length < 1){
+            console.log('장바구니없음');
             await Cart.create({
                 std_id:req.session.std_id,
             })
@@ -43,6 +38,8 @@ router.route('/')
             const cat = user_cart[0].dataValues;
             req.session.cart_id = cat.cart_id;
         }else{
+            console.log('장바구니있음');
+            const cat = user_cart[0].dataValues;
             req.session.cart_id = cat.cart_id;
         };
 

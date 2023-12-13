@@ -247,6 +247,16 @@
             padding-left: 20px;
         }
 
+        #all{
+            width:80px;
+            margin: 20px 0px;
+        }
+
+        .box3{
+            display: flex;
+
+        }
+
     </style>
 </head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -347,8 +357,11 @@
 
         </div></div>
 
-        <div>
-            <p class="titel3">장바구니</p>
+        <div class="box2">
+                <div class="box">
+                <p class="titel3">장바구니</p>
+                <button type="button titel3" class="but" id="all" onclick="allButtonClick()">일괄담기</button>
+                </div>
             <table id="cart-list">
                 <thead>
                     <tr>

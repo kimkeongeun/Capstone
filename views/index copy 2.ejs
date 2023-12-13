@@ -178,6 +178,7 @@
         table {
         border-collapse: collapse;
         border: 0;
+        border: 1px solid #aaa;
         }
         th,
         td {
@@ -196,8 +197,13 @@
         td {
         padding: 0.6rem;
         min-width: 6rem;
-        text-align: left;
+        text-align: center;
         margin: 0;
+        }
+
+        td{
+            width: 100px;
+            height: 100px;
         }
         thead th {
         position: sticky;
@@ -209,17 +215,18 @@
         left: 0;
         border-left: 0;
         }
-        tbody th {
+        tbody th{
         background-clip: padding-box;
         border-left: 0;
+        
+        text-align: center;
         }
+
         tbody {
         position: relative;
+        
         }
-        tbody th {
-        position: sticky;
-        left: 0;
-        }
+
         thead th,
         tbody th {
         background-color: #f8f8f8;
@@ -282,26 +289,22 @@
                     <button id="timetable" onclick="location.href='index3'">시간표</button></a>
                 </div>
             </div>
+            
             <div>
-                <table id="table">
-                <thead>
-                    <tr>
-                    <th>NO</th>
-                    <th>구분</th>
-                    <th>이수구분</th>
-                    <th>과목코드-분반</th>
-                    <th>학년</th>
-                    <th>학점</th>
-                    <th>교과목명</th>
-                    <th>담당교수</th>
-                    <th>강의시간</th>
-                    <th>강의실</th>
-                    <th>신청</th>
-                    </tr>
-                </thead>
-                <tbody id="searchResult">
-                    <td>test</td>
-                </tbody>
+                <table id="location">
+                    <thead>
+                        <tr>
+                            <th width=150>교시</th>
+                            <th width=150>월</th>
+                            <th width=150>화</th>
+                            <th width=150>수</th>
+                            <th width=150>목</th>
+                            <th width=150>금</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><script> getReg_tmP();</script></tr>
+                    <tbody>
                 </table>
             </div>
         </div>

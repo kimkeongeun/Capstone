@@ -12,7 +12,6 @@ async function put_click(cls_cord, cls_semester) {
     for (const cart_item of c_item) {
 
         cond = (cart_item.cls_cord == cls_cord && cart_item.cls_semester == cls_semester);
-        console.log('비교했음');
         console.log(cond);
         if (cond) {
             alert("해당 과목이 이미 담겨있습니다.");
@@ -28,9 +27,6 @@ async function put_click(cls_cord, cls_semester) {
         } else {
             // 서버에 값 전달
             try {
-                console.log('테스트');
-                console.log(cls_cord);
-                console.log(cls_semester);
                 await axios.post(`/cartItems`, { cord: cls_cord, semester: cls_semester }, { headers: { 'Content-Type': 'application/json' } });
                 // 장바구니 다시 로딩
                 getCart_item();
@@ -58,12 +54,12 @@ async function getCart_item() {
             row.appendChild(td);
 
             const button = document.createElement('button');
-            button.className = "my-button but";
+            button.className = "my-button but allbt";
             button.textContent = '담기';
             button.addEventListener('click', async function () {
                 try {
                     const response = await axios.post(`/registration`, { cord: cart_item.classData_id.cls_cord, semester: cart_item.classData_id.cls_semester, time:cart_item.classData_id.pg_time, id:cart_item.item_id});
-                    alert(response.data);
+                    alert(cart_item.classData_id.cls_name + ' >> ' + response.data);
                     getCart_item()
 
                 } catch (err) {
@@ -269,5 +265,186 @@ async function getReg_list() {
         });
     } catch (err) {
         console.error(err);
+    }
+};
+
+
+
+let idArray = new Array();
+let dayArray = new Array();
+let timeArray = new Array();
+
+async function getReg_tm() {
+    try {
+        const res = await axios.get('/registration');
+        const g_list = res.data;
+
+        let n=0;
+
+
+        for (let i = 0; i < g_list.length; i++) {
+            let id = g_list[i].reg_id;
+            let g_time = g_list[i].clsData_id.pg_time;
+            let time = '';
+        
+            // pg_time이 null 또는 undefined인 경우 처리
+            if (!g_time) {
+                console.log('값 없음')
+                continue; // 다음 반복으로 건너뜀
+            }
+            
+            //문자열에서 사이버 부분 제거
+            if(g_time.startsWith('사')){
+                g_time = g_time.substring(2)
+            }
+
+            //요일 분리
+            let Day = g_time.substring(0, 1);
+            g_time = g_time.substring(1)
+
+            while(true){
+                
+                if(g_time==''){
+                    break;
+                }
+                time = g_time.substring(0, 1);
+                g_time = g_time.substring(2)
+
+                //시간표 담을거임
+                idArray[n]=id;
+                dayArray[n]=Day
+                timeArray[n]=time
+                n++;
+            }
+        }
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+async function tm_s(day, time){
+    
+    for(let i =0; i<idArray.length; i++){
+        
+        if(dayArray[i]==day && timeArray[i]==time){
+            return idArray[i]
+        }
+    }
+    return ' '
+};
+
+async function getReg_tmP() {
+    try {
+        const res = await axios.get('/registration');
+        const g_list = res.data;
+        await getReg_tm();
+        const tbody = document.querySelector('#location tbody');
+        tbody.innerHTML = '';
+        let id;
+
+        for (let i = 0; i < 9; i++){
+
+            const row = document.createElement('tr');
+
+            let td = document.createElement('td');
+            td.textContent = i + 1 + '교시';
+            row.appendChild(td);
+
+            id = await tm_s('월', i+1);
+            const res1 = await axios.get(`/registration/${id}`);
+            const cls1 = res1.data;
+            td = document.createElement('td');
+            if(id != ' '){
+                td.innerHTML += `${cls1[0].clsData_id.cls_name}<br>`;
+                td.innerHTML += `${cls1[0].clsData_id.pg_time}<br>`;
+                td.innerHTML += `${cls1[0].clsData_id.room}<br>`;
+                td.innerHTML += `${cls1[0].clsData_id.instrunctor}<br>`;
+            }else{
+                td.textContent = ''
+            }
+            row.appendChild(td);
+
+
+            id = await tm_s('화', i+1);
+            const res2 = await axios.get(`/registration/${id}`);
+            const cls2 = res2.data;
+            td = document.createElement('td');
+            if(id != ' '){
+                td.innerHTML += `${cls2[0].clsData_id.cls_name}<br>`;
+                td.innerHTML += `${cls2[0].clsData_id.pg_time}<br>`;
+                td.innerHTML += `${cls2[0].clsData_id.room}<br>`;
+                td.innerHTML += `${cls2[0].clsData_id.instrunctor}<br>`;
+            }else{
+                td.textContent = ''
+            }
+            row.appendChild(td);
+
+            id = await tm_s('수', i+1);
+            const res3 = await axios.get(`/registration/${id}`);
+            const cls3 = res3.data;
+            td = document.createElement('td');
+            if(id != ' '){
+                td.innerHTML += `${cls3[0].clsData_id.cls_name}<br>`;
+                td.innerHTML += `${cls3[0].clsData_id.pg_time}<br>`;
+                td.innerHTML += `${cls3[0].clsData_id.room}<br>`;
+                td.innerHTML += `${cls3[0].clsData_id.instrunctor}<br>`;
+            }else{
+                td.textContent = ''
+            }
+            row.appendChild(td);
+
+            id = await tm_s('목', i+1);
+            const res4 = await axios.get(`/registration/${id}`);
+            const cls4 = res4.data;
+            td = document.createElement('td');
+            if(id != ' '){
+                td.innerHTML += `${cls4[0].clsData_id.cls_name}<br>`;
+                td.innerHTML += `${cls4[0].clsData_id.pg_time}<br>`;
+                td.innerHTML += `${cls4[0].clsData_id.room}<br>`;
+                td.innerHTML += `${cls4[0].clsData_id.instrunctor}<br>`;
+            }else{
+                td.textContent = ''
+            }
+            row.appendChild(td);
+
+            id = await tm_s('금', i+1);
+            const res5 = await axios.get(`/registration/${id}`);
+            const cls5 = res5.data;
+            td = document.createElement('td');
+            if(id != ' '){
+                td.innerHTML += `${cls5[0].clsData_id.cls_name}<br>`;
+                td.innerHTML += `${cls5[0].clsData_id.pg_time}<br>`;
+                td.innerHTML += `${cls5[0].clsData_id.room}<br>`;
+                td.innerHTML += `${cls5[0].clsData_id.instrunctor}<br>`;
+            }else{
+                td.textContent = ''
+            }
+            row.appendChild(td);
+
+
+            tbody.appendChild(row);
+        };
+    } catch (err) {
+        console.error(err);
+    }
+
+};
+
+
+async function allButtonClick() {
+    // "일괄 클릭" 버튼을 클릭했을 때 실행할 코드
+    console.log('일괄 클릭 버튼을 클릭했습니다.');
+
+    const tbody = document.querySelector('tbody');
+
+    // 다른 버튼 자동 클릭
+    const otherButtons = document.querySelectorAll('.allbt');
+
+    if (otherButtons.length > 0) {
+        otherButtons.forEach(async function (button) {
+            button.click(); // 각 버튼을 클릭하는 동작
+        });
+    } else {
+        console.error('버튼을 찾을 수 없습니다.');
     }
 };

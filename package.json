@@ -4,7 +4,7 @@
   "description": "1.0.0",
   "main": "sever.js",
   "scripts": {
-    "start": "node new_sever.js"
+    "start": "node ./web.js"
   },
   "author": "classcatch",
   "license": "MIT",
